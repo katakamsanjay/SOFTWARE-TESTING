@@ -1,0 +1,40 @@
+package org.example;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Radiobuttons {
+    public static void main(String[] args) throws InterruptedException {
+        WebDriver driver;
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.get("https://mytask365.blogspot.com/2024/02/buttons.html");
+        driver.manage().window().maximize();
+
+        WebElement checkBoxSelected = driver.findElement(By.id("apple"));
+        boolean isSelected = checkBoxSelected.isSelected();
+        // performing click operation if element is not selected
+        if(!isSelected) {
+            checkBoxSelected.click();
+        }
+        Thread.sleep(2000);
+
+        WebElement checkBoxDisplayed = driver.findElement(By.id("banana"));
+        boolean isDisplayed = checkBoxDisplayed.isDisplayed();
+        // performing click operation if element is displayed
+        if (isDisplayed) {
+            checkBoxDisplayed.click();
+        }
+        Thread.sleep(2000);
+
+        WebElement checkBoxEnabled = driver.findElement(By.id("orange"));
+        boolean isEnabled = checkBoxEnabled.isEnabled();
+        // performing click operation if element is enabled
+        if (isEnabled) {
+            checkBoxEnabled.click();
+        }
+    }
+}
