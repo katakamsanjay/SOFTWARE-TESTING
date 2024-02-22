@@ -1,0 +1,223 @@
+package org.example.MenuDriven;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class MenuDriven {
+    static WebDriver driver;
+
+    public static void openbrouser() {
+        WebDriver driver;
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.get("https://www.google.com");
+    }
+
+    public static void openurl() {
+        WebDriver driver;
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.get("https://www.amazon.com");
+    }
+    public static void loginsuccess() {
+        WebDriver driver;
+        WebDriverManager.chromedriver().setup();
+        driver=new ChromeDriver();
+        driver.get("https://practicetestautomation.com/practice-test-login/");
+        driver.findElement(By.xpath("//input[@id='username']")).sendKeys("student");
+        driver.findElement(By.xpath("//input[@id='password']")).sendKeys("Password123");
+        driver.findElement(By.xpath("//button[@id='submit']")).click();
+    }
+    public static void invalid() {
+        WebDriver driver;
+        WebDriverManager.chromedriver().setup();
+        driver=new ChromeDriver();
+        driver.get("https://practicetestautomation.com/practice-test-login/");
+        driver.findElement(By.xpath("//input[@id='username']")).sendKeys("student");
+        driver.findElement(By.xpath("//input[@id='password']")).sendKeys("Password");
+        driver.findElement(By.xpath("//button[@id='submit']")).click();
+
+        System.out.println("Browser closed successfully.");
+    }
+    public static void alllocaters() {
+        WebDriver driver;
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.get("https://www.github.com/login");
+        driver.findElement(By.id("login_field")).sendKeys("by id");
+        driver.findElement(By.name("password")).sendKeys("nmae");
+        driver.findElement(By.className("header-logo"));
+        //driver.findElement(By.linkText("Forgot password?")).click();
+        //driver.findElement(By.partialLinkText("Create an account")).click();
+        driver.findElement(By.tagName("h1"));
+    }
+    public static void cssselecter() {
+        WebDriver driver;
+        WebDriverManager.chromedriver().setup();
+        driver=new ChromeDriver();
+        driver.get("https://practicetestautomation.com/practice-test-login/");
+        driver.findElement(By.cssSelector("#username")).sendKeys(" by css selecter");
+    }
+    public static void xpath() {
+        WebDriver driver;
+        WebDriverManager.chromedriver().setup();
+        driver=new ChromeDriver();
+        driver.get("https://practicetestautomation.com/practice-test-login/");
+        driver.findElement(By.xpath("//input[@id='username']")).sendKeys(" by xpath");
+    }
+    public static void radio() throws InterruptedException {
+        WebDriver driver;
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.get("https://mytask365.blogspot.com/2024/02/buttons.html");
+        driver.manage().window().maximize();
+
+        WebElement checkBoxSelected = driver.findElement(By.id("apple"));
+        boolean isSelected = checkBoxSelected.isSelected();
+// performing click operation if element is not selected
+        if (!isSelected) {
+            checkBoxSelected.click();
+        }
+        Thread.sleep(2000);
+
+        WebElement checkBoxDisplayed = driver.findElement(By.id("banana"));
+        boolean isDisplayed = checkBoxDisplayed.isDisplayed();
+// performing click operation if element is displayed
+        if (isDisplayed) {
+            checkBoxDisplayed.click();
+        }
+        Thread.sleep(2000);
+
+        WebElement checkBoxEnabled = driver.findElement(By.id("orange"));
+        boolean isEnabled = checkBoxEnabled.isEnabled();
+// performing click operation if element is enabled
+        if (isEnabled) {
+            checkBoxEnabled.click();
+        }
+
+        driver.get("https://mytask365.blogspot.com/2024/02/dropdown.html");
+        driver.manage().window().maximize();
+
+        Thread.sleep(2000);
+        WebElement checkBoxSelected2 = driver.findElement(By.id("SelectID_One"));
+        boolean isSelected2 = checkBoxSelected2.isSelected(); // Corrected variable name
+// performing click operation if element is not selected
+        if (!isSelected2) { // Corrected variable name
+            checkBoxSelected2.click(); // Corrected variable name
+        }
+        Thread.sleep(2000);
+        /* Validate isDisplayed and click */
+        WebElement checkBoxDisplayed2 = driver.findElement(By.id("SelectID_Two"));
+        boolean isDisplayed2 = checkBoxDisplayed2.isDisplayed(); // Corrected variable name
+// performing click operation if element is displayed
+        if (isDisplayed2) { // Corrected variable name
+            checkBoxDisplayed2.click(); // Corrected variable name
+        }
+        /* Validate isEnabled and click */
+        Thread.sleep(2000);
+        WebElement checkBoxEnabled2 = driver.findElement(By.id("SelectID_Three"));
+        boolean isEnabled2 = checkBoxEnabled2.isEnabled(); // Corrected variable name
+// performing click operation if element is enabled
+        if (isEnabled2) { // Corrected variable name
+            checkBoxEnabled2.click(); // Corrected variable name
+        }
+
+
+    }
+    public static void alerts() throws InterruptedException {
+        WebDriver driver;
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.get("https://mytask365.blogspot.com/2024/02/blog-post.html");
+        System.out.println(driver.findElement(By.id("basicAlertBtn")).getText());
+        Thread.sleep(2000);
+        driver.findElement(By.id("basicAlertBtn")).click();
+        Thread.sleep(2000);
+        System.out.println(driver.switchTo().alert().getText());
+        Thread.sleep(2000);
+        driver.switchTo().alert().accept();
+        Thread.sleep(2000);
+        driver.findElement(By.id("confirmationBoxBtn")).click();
+        Thread.sleep(2000);
+        driver.switchTo().alert().accept();
+        Thread.sleep(2000);
+        driver.findElement(By.id("promptBoxBtn")).click();
+        Thread.sleep(2000);
+        driver.switchTo().alert().sendKeys("sanjay");
+        Thread.sleep(2000);
+        driver.switchTo().alert().accept();
+
+    }
+    public static void screenshot() throws IOException {
+        WebDriver driver;
+        WebDriverManager.chromedriver().setup();
+        driver=new ChromeDriver();
+        driver.get("https://github.com/");
+
+        TakesScreenshot ts=(TakesScreenshot)driver;
+        File file=ts.getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(file, new File(".idea/Screenshots/Image.png"));
+    }
+
+    public static void main(String[] args) throws InterruptedException, IOException {
+        Scanner scanner = new Scanner(System.in);
+
+        while(true) {
+            System.out.println("\nMenu:");
+            System.out.println("1. Open Browser");
+            System.out.println("2. open url");
+            System.out.println("3.open the browser if the credentials are correct ");
+            System.out.println("4. open the url and give responses of the invalid credentials");
+            System.out.println("5.Implement all locators (static)");
+            System.out.println("6.Implement CSSSelector(dynamic)");
+            System.out.println("7.Implement Xpath(dynamic)");
+            System.out.println("8.Develop all Html Controls including checkbox radio button drop downs(single and multiple) separately");
+            System.out.println("9.Implement all Alerts(simple alert,confirm,prompt alert)separate programs");
+            System.out.println("10.Implement window/screenshot");
+            System.out.print("Enter your choice (1-10): ");
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    openbrouser();
+                    break;
+                case "2":
+                    openurl();
+                    break;
+                case "3":
+                    loginsuccess();
+                        break;
+                case "4":
+                        invalid();
+                    break;
+                case "5":
+                        alllocaters();
+                    break;
+                case "6":
+                      cssselecter();
+                    break;
+                case "7":
+                        xpath();
+                    break;
+                case "8":
+                        radio();
+                    break;
+                case "9":
+                        alerts();
+                    break;
+                case "10":
+                        screenshot();
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter a number between 1 and 10.");
+            }
+        }
+    }
+}
+
